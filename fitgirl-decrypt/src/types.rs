@@ -2,6 +2,7 @@ use serde::{ser::SerializeTuple as _, Deserialize, Serialize, Serializer};
 
 /// CipherInfo is directly from the JSON returned from privatebin.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 pub struct CipherInfo {
     /// additional data about a paste
     pub adata: AData,
@@ -11,6 +12,7 @@ pub struct CipherInfo {
 
 /// Additional data about a paste.
 #[derive(Debug, Clone, Deserialize)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 pub struct AData {
     /// everything related to decrypt cipher text
     pub cipher: Cipher,
@@ -24,7 +26,7 @@ pub struct AData {
 
 impl AsRef<CipherInfo> for CipherInfo {
     fn as_ref(&self) -> &CipherInfo {
-        &self
+        self
     }
 }
 
@@ -33,6 +35,7 @@ impl AsRef<CipherInfo> for CipherInfo {
 ///
 /// [`serde`] could deserialize this from an 8 length list.
 #[derive(Deserialize, Debug, Clone)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 pub struct Cipher {
     /// IV (nonce), in base64
     pub cipher_iv: String,
@@ -54,6 +57,7 @@ pub struct Cipher {
 
 /// Compression type
 #[derive(Default, Deserialize, Debug, Serialize, Clone)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 #[serde(rename_all = "lowercase")]
 pub enum CompressionType {
     /// no compression
@@ -97,6 +101,7 @@ impl Serialize for Cipher {
 
 /// `Attachment` is from the decrypted paste JSON.
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 pub struct Attachment {
     /// data URI startswith `data:application/x-bittorrent;base64,`
     pub attachment: String,

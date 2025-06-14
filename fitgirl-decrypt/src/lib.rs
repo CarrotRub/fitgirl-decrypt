@@ -17,6 +17,7 @@ pub use error::Error;
 /// [`Paste`] stores pasteid and key.
 #[allow(unused)]
 #[derive(Debug, Clone)]
+#[cfg_attr(feature = "specta", derive(specta::Type))]
 pub struct Paste<'a> {
     key: Vec<u8>,
     key_base58: &'a str,

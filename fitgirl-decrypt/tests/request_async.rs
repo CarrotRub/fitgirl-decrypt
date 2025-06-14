@@ -16,7 +16,7 @@ async fn test_reqwest_decrypt() -> Result<(), Error> {
 #[cfg(feature = "nyquest")]
 #[tokio::test]
 async fn test_nyquest_decrypt() -> Result<(), Error> {
-    let _ = init_nyquest();
+    init_nyquest();
     let url = "https://paste.fitgirl-repacks.site/?e9a29aba6419df2e#EPGKu25RdaUZu45s4yrmpDLKVmFZq214VCos2t9M54a7";
     let paste = Paste::parse_url(url)?;
 
